@@ -1,0 +1,22 @@
+{
+  "name": "sunvoy-scraper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run build && node dist/main.js",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@jamil_github.com:muhammad-jamil-ahmed/sunvoy-scraper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
