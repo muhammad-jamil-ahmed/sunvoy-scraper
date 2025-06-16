@@ -1,28 +1,25 @@
-import { readFile, writeFile, rename } from "node:fs/promises";
-import * as path from "node:path";
+import { readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const here = path.dirname(fileURLToPath(import.meta.url));
-const root = path.join(here, "..", "..");
-const SESSION_F = path.join(root, ".session");
-const USERS_F = path.join(root, "users.json");
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const SESSION_FILE = path.join(__dirname, "../../.session");
+const USERS_FILE = path.join(__dirname, "../../users.json");
 
-export const FsStorage = {
+export default {
     async readSession(): Promise<string | null> {
         try {
-            return await readFile(SESSION_F, "utf8");
+            return await readFile(SESSION_FILE, "utf8");
         } catch {
             return null;
         }
     },
 
     async writeSession(cookie: string): Promise<void> {
-        await writeFile(SESSION_F, cookie, "utf8");
+        await writeFile(SESSION_FILE, cookie, "utf8");
     },
 
-    async writeUsers(arr: unknown[]): Promise<void> {
-        const tmp = `${USERS_F}.tmp`;
-        await writeFile(tmp, JSON.stringify(arr, null, 2));
-        await rename(tmp, USERS_F);
+    async writeUsers(users: any[]): Promise<void> {
+        await writeFile(USERS_FILE, JSON.stringify(users, null, 2));
     }
 };
